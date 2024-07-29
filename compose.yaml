@@ -14,7 +14,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/app
+      - .:/app  # 挂载本地所有文件!!
     # command: ["bash", ".entrypoint.sh"]
     # command: "bash ./entrypoint.sh"
 
