@@ -8,7 +8,7 @@
 
 ARG PYTHON_VERSION=3.12.2
 FROM python:${PYTHON_VERSION}-slim as base
-
+RUN apt update && apt upgrade -y && apt install curl -y
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
 
@@ -43,14 +43,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 # Copy the source code into the container.
 COPY . .
-
+# RUN chmod +x /app/entrypoint.sh
 # Expose the port that the application listens on.
 EXPOSE 8000
 
 # Run the application.
-# CMD whoami
-# CMD ls
-# CMD ["django-admin", "startproject", "pj1"]
-# CMD ls
-CMD bin/bash
-# CMD ["python", "manage.py", "runserver"]
+CMD ["bash", "./entrypoint.sh"]

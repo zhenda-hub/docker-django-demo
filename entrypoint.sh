@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "start sh!!!!!!!"
+# ls
+# pwd
+# whoami
+# pip list
+
+# pip freeze > requirements.txt
+# django-admin startproject pj1
+
+cd pj1
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
