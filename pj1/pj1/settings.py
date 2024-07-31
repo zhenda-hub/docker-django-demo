@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app01',
 ]
 
 MIDDLEWARE = [
@@ -74,9 +76,27 @@ WSGI_APPLICATION = 'pj1.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db' / 'db.sqlite3',
+    # }
+    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'yourdbname',
+    #     'USER': 'yourdbuser',
+    #     'PASSWORD': 'yourdbpassword',
+    #     'HOST': 'yourdbhost',
+    #     'PORT': 'yourdbport',
+    # },
+    
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
+        'NAME': os.getenv('DB_NAME'),  # 数据库名，先前创建的
+        'USER': os.getenv('DB_USER'),     # 用户名，可以自己创建用户
+        'PASSWORD': os.getenv('DB_PASSWORD'),  # 密码
+        'HOST': os.getenv('DB_HOST'),  # mysql服务所在的主机ip
+        'PORT': '3306',         # mysql服务端口
     }
 }
 
@@ -123,3 +143,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+try:
+    from local_settings import *
+except Exception as e:
+    print(e)
