@@ -92,14 +92,15 @@ DATABASES = {
     
     'default': {
         'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
+        'HOST': os.getenv('DB_HOST'),  # mysql服务所在的主机ip
         'NAME': os.getenv('DB_NAME'),  # 数据库名，先前创建的
         'USER': os.getenv('DB_USER'),     # 用户名，可以自己创建用户
         'PASSWORD': os.getenv('DB_PASSWORD'),  # 密码
-        'HOST': os.getenv('DB_HOST'),  # mysql服务所在的主机ip
         'PORT': '3306',         # mysql服务端口
     }
 }
-
+print(os.getenv('DB_HOST'))
+print(os.getenv('WEB_HOST'))
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

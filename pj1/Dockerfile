@@ -8,7 +8,7 @@
 
 ARG PYTHON_VERSION=3.12.2
 FROM python:${PYTHON_VERSION}-slim as base
-RUN apt update && apt upgrade -y && apt install curl -y
+RUN apt update && apt upgrade -y && apt install curl -y && apt install git -y && apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config -y
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
 
@@ -16,7 +16,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
+WORKDIR /app/pj1
 
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
