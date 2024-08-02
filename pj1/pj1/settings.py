@@ -139,6 +139,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]  # 其他静态资源地址
+STATIC_ROOT = BASE_DIR / 'collected_static'  # 生产环境 使用 collection
+
+# 配置media
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -146,6 +154,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except Exception as e:
     print(e)
