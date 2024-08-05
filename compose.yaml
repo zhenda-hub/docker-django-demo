@@ -18,6 +18,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306  # 暴露端口方便本地查看
 
   web1:
     build:
