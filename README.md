@@ -11,7 +11,7 @@
 
 
 TODO:
-- 使用docker做开发环境
+<!-- - 使用docker做开发环境
 - 使用IDE连接docker做开发
 - 多个django服务
 - nginx负载均衡
@@ -19,4 +19,4 @@ TODO:
 - 数据的保存恢复
 - cicd
   - cd常用方法
-- ab测试
+- ab测试 -->
