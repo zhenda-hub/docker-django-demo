@@ -15,5 +15,8 @@ python manage.py collectstatic --noinput
 # python manage.py runserver 0.0.0.0:8000
 gunicorn -c gunicorn_conf.py pj1.wsgi
 
-tail -f /dev/null
+# tail -f /dev/null
 # sleep infinity
+
+# 执行传入的命令或默认命令
+exec "$@"
