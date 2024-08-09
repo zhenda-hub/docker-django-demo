@@ -11,11 +11,7 @@ services:
   db:
     image: mysql:latest
     container_name: db
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    env_file: ".env"
     volumes:
       - db_data:/var/lib/mysql
     ports:
@@ -32,10 +28,7 @@ services:
       - media_data:/app/pj1/media
     environment:
       - WEB_HOST=web111
-      - DB_HOST=${DB_HOST}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+    env_file: ".env"
     depends_on:
       - db
 
@@ -50,10 +43,7 @@ services:
       - media_data:/app/pj1/media
     environment:
       - WEB_HOST=web222
-      - DB_HOST=${DB_HOST}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
+    env_file: ".env"
     depends_on:
       - db
   nginx:
