@@ -9,7 +9,7 @@
 ARG PYTHON_VERSION=3.12.2
 FROM python:${PYTHON_VERSION}-slim as base
 
-# dibian12 替换 APT 源为国内源
+# debian12 替换 APT 源为国内源
 # RUN sed -i 's|http://deb.debian.org/debian|http://mirrors.ustc.edu.cn/debian|g' /etc/apt/sources.list && \
 #     sed -i 's|http://security.debian.org/debian-security|http://mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list && \
 #     apt-get update
@@ -22,16 +22,17 @@ FROM python:${PYTHON_VERSION}-slim as base
 RUN sed -i 's@deb.debian.org@mirrors.tuna.tsinghua.edu.cn@g' /etc/apt/sources.list.d/debian.sources && \
     sed -i 's@deb.debian.org@mirrors.ustc.edu.cn@g' /etc/apt/sources.list.d/debian.sources && \
     sed -i 's@deb.debian.org@mirrors.aliyun.com@g' /etc/apt/sources.list.d/debian.sources && \
-    sed -i 's@deb.debian.org@mirrors.cloud.tencent.com@g' /etc/apt/sources.list.d/debian.sources && \
-    apt-get update
+    sed -i 's@deb.debian.org@mirrors.cloud.tencent.com@g' /etc/apt/sources.list.d/debian.sources
 
 
 # 安装所需的软件包（这里仅为示例）, 最后清理apt-get缓存
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     curl \
     git \
     python3-dev default-libmysqlclient-dev build-essential pkg-config \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
