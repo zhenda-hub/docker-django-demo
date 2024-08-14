@@ -1,9 +1,13 @@
-#!/bin/bash
+#!/bin/sh
+
+# set -eu
 
 echo "start sh!!!!!!!"
 # ls
+# echo "pwd: "
 # pwd
 # whoami
+# echo "pip list: "
 # pip list
 
 # pip freeze > requirements.txt

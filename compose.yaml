@@ -18,6 +18,7 @@ services:
       - 3306:3306  # 暴露端口方便本地查看
 
   web1:
+    image: zzdnb/docker_django_demo:V1.0.0
     build:
       context: ./pj1
     ports:
@@ -33,6 +34,7 @@ services:
       - db
 
   web2:
+    image: zzdnb/docker_django_demo:V1.0.0
     build:
       context: ./pj1
     ports:
