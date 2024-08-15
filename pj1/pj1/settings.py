@@ -29,8 +29,8 @@ DEBUG = True
 # 设置允许的host!!
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
+    f'http://localhost:{os.getenv("NGINX_PORT")}',
+    f'http://127.0.0.1:{os.getenv("NGINX_PORT")}',
 ]
 
 # Application definition
