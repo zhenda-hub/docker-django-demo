@@ -32,6 +32,7 @@ CSRF_TRUSTED_ORIGINS = [
     f'http://localhost:{os.getenv("NGINX_PORT")}',
     f'http://127.0.0.1:{os.getenv("NGINX_PORT")}',
 ]
+CSRF_TRUSTED_ORIGINS.extend(os.getenv('CSRF_TRUSTED_ORIGINS').split(','))
 
 # Application definition
 
