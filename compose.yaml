@@ -52,7 +52,7 @@ services:
       - NGINX_PORT=${NGINX_PORT}
     # env_file: ".env"
     depends_on:
-      - db
+      - db2
 
   web2:
     image: zzdnb/docker_django_demo:V1.0.0
@@ -75,7 +75,7 @@ services:
       - NGINX_PORT=${NGINX_PORT}
     # env_file: ".env"
     depends_on:
-      - db
+      - db2
   nginx:
     image: nginx:latest
     container_name: nginx
