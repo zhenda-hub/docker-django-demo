@@ -8,18 +8,18 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  db:
-    image: mysql:latest
-    # env_file: ".env"
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - 3306:3306  # 暴露端口方便本地查看
+  # db:
+  #   image: mysql:latest
+  #   # env_file: ".env"
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #     - MYSQL_DATABASE=${DB_NAME}
+  #     - MYSQL_USER=${DB_USER}
+  #     - MYSQL_PASSWORD=${DB_PASSWORD}
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #   ports:
+  #     - 3306:3306  # 暴露端口方便本地查看
   db2:
     image: postgres:latest
     environment:
@@ -89,7 +89,7 @@ services:
       - web1
       - web2
 volumes:
-  db_data:
+  # db_data:
   postgres_data:
   static_data:
   media_data:

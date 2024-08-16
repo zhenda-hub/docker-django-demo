@@ -25,4 +25,5 @@ TODO:
 多阶段构建!!
 120MB -->
 
-logs 没有了!!!
+mysql 400M
+postgres 20M
