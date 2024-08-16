@@ -10,12 +10,26 @@
 services:
   db:
     image: mysql:latest
-    # container_name: db
-    env_file: ".env"
+    # env_file: ".env"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
     ports:
       - 3306:3306  # 暴露端口方便本地查看
+  db2:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   web1:
     image: zzdnb/docker_django_demo:V1.0.0
@@ -29,7 +43,14 @@ services:
       - media_data:/app/pj1/media
     environment:
       - WEB_HOST=web111
-    env_file: ".env"
+      - DB_HOST=db2
+      - DB_TYPE=postgres
+      # - DB_TYPE=mysql
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - NGINX_PORT=${NGINX_PORT}
+    # env_file: ".env"
     depends_on:
       - db
 
@@ -45,7 +66,14 @@ services:
       - media_data:/app/pj1/media
     environment:
       - WEB_HOST=web222
-    env_file: ".env"
+      - DB_HOST=db2
+      - DB_TYPE=postgres
+      # - DB_TYPE=mysql
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - NGINX_PORT=${NGINX_PORT}
+    # env_file: ".env"
     depends_on:
       - db
   nginx:
@@ -62,5 +90,6 @@ services:
       - web2
 volumes:
   db_data:
+  postgres_data:
   static_data:
   media_data:
