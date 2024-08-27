@@ -39,7 +39,7 @@ jobs:
         context: ./pj1
         file: ./pj1/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/pj1:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -53,11 +53,11 @@ jobs:
       with:
         host: ${{ secrets.TENCENT_HOST }}
         username: ${{ secrets.TENCENT_USERNAME }}
-        key: ${{ secrets.TENCENT_SSH_KEY }}
+        key: ${{ secrets.TENCENT_PRI_SSH_KEY }}
         script: |
-          cd /path/to/your/project
-          git pull origin main
-          echo "PJ1_IMAGE=${{ secrets.DOCKER_USERNAME }}/pj1:${{ github.sha }}" > .env
+          cd /www/wwwroot/docker-django-demo
+          git pull
+          echo "PJ1_IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}" > .env
           docker-compose pull
           docker-compose up -d
           docker system prune -af

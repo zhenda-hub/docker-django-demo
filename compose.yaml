@@ -32,7 +32,8 @@ services:
       - "5432:5432"
 
   web1:
-    image: zzdnb/docker_django_demo:V1.0.0
+    # image: zzdnb/docker_django_demo:V1.0.0
+    image: ${PJ1_IMAGE}
     build:
       context: ./pj1
     ports:
@@ -56,7 +57,7 @@ services:
       - db2
 
   web2:
-    image: zzdnb/docker_django_demo:V1.0.0
+    image: ${PJ1_IMAGE}
     build:
       context: ./pj1
     ports:
