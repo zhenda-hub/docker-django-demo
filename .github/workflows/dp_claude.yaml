@@ -1,4 +1,4 @@
-name: Deploy to Tencent Cloud
+name: Deploy claude
 
 on:
     push:
@@ -60,4 +60,4 @@ jobs:
           echo "PJ1_IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}" > .env
           docker-compose pull
           docker-compose up -d
-          docker system prune -af
+        #   docker system prune -af
