@@ -1,8 +1,10 @@
 name: Deploy Django to Tencent Cloud
 
 on:
-  push:
-    branches: [ main ]
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "master" ]
 
 jobs:
   build:
