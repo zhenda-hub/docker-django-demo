@@ -33,7 +33,7 @@ services:
 
   web1:
     # image: zzdnb/docker_django_demo:V1.0.0
-    image: ${PJ1_IMAGE}
+    image: zzdnb/docker_django_demo:latest
     build:
       context: ./pj1
     ports:
@@ -57,7 +57,7 @@ services:
       - db2
 
   web2:
-    image: ${PJ1_IMAGE}
+    image: zzdnb/docker_django_demo:latest
     build:
       context: ./pj1
     ports:

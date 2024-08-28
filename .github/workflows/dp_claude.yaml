@@ -68,5 +68,5 @@ jobs:
         script: |
           cd /www/wwwroot/docker-django-demo
           git pull
-          echo "PJ1_IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}" >> .env
+          # echo "PJ1_IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}" >> .env
           sudo docker compose up --build -d
