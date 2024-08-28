@@ -39,9 +39,9 @@ jobs:
       - name: Use SSH to connect to server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.TENCENT_HOST }}
+          username: ${{ secrets.TENCENT_USERNAME }}
+          key: ${{ secrets.TENCENT_PRI_SSH_KEY }}
           script: |
             cd /www/wwwroot/docker-django-demo
             git pull

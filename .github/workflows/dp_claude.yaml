@@ -53,7 +53,7 @@ jobs:
       with:
         host: ${{ secrets.TENCENT_HOST }}
         username: ${{ secrets.TENCENT_USERNAME }}
-        key: ${{ secrets.TENCENT_SSH_KEY }}
+        key: ${{ secrets.TENCENT_PRI_SSH_KEY }}
         # source: "compose.yaml,nginx/nginx.conf,.env"
         source: ".env"
         target: "/www/wwwroot/docker-django-demo"
