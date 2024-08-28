@@ -23,14 +23,14 @@ jobs:
       - name: Build Docker Image
         # run: docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA -f pj1/Dockerfile .
         run: |
-        cd pj1
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA .
-        docker tag ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+          cd pj1
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
       
       - name: Push Docker Image
         run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA
-        docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
 
   deploy:
     needs: build

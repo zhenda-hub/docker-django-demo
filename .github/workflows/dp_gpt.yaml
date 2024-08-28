@@ -25,11 +25,13 @@ jobs:
         run: |
           cd pj1
           timestamp=$(date +'%Y%m%d-%H%M%S')
+          echo "Using timestamp: $timestamp"
           docker build -t zzdnb/docker_django_demo:$timestamp .
           docker tag zzdnb/docker_django_demo:$timestamp zzdnb/docker_django_demo:latest
 
       - name: Push Docker image to registry
         run: |
+          echo "Using timestamp: $timestamp"
           docker push zzdnb/docker_django_demo:$timestamp
           docker push zzdnb/docker_django_demo:latest
 
