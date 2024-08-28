@@ -18,6 +18,7 @@ jobs:
 
       - name: Build Docker image
         run: |
+          cd pj1
           docker build -t zzdnb/docker_django_demo:${{ github.sha }} .
           docker tag zzdnb/docker_django_demo:${{ github.sha }} zzdnb/docker_django_demo:latest
 
