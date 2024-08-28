@@ -47,6 +47,16 @@ jobs:
     #   run: |
     #     rm -rf /tmp/.buildx-cache
     #     mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+    
+    - name: Copy files to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.TENCENT_HOST }}
+        username: ${{ secrets.TENCENT_USERNAME }}
+        key: ${{ secrets.TENCENT_SSH_KEY }}
+        # source: "compose.yaml,nginx/nginx.conf,.env"
+        source: ".env"
+        target: "/www/wwwroot/docker-django-demo"
 
     - name: Deploy to Tencent Cloud
       uses: appleboy/ssh-action@master
@@ -54,13 +64,9 @@ jobs:
         host: ${{ secrets.TENCENT_HOST }}
         username: ${{ secrets.TENCENT_USERNAME }}
         key: ${{ secrets.TENCENT_PRI_SSH_KEY }}
+        # password: ${{ secrets.TENCENT_PASSWORD }}
         script: |
           cd /www/wwwroot/docker-django-demo
           git pull
           echo "PJ1_IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}" >> .env
-          sudo docker compose pull
-          sudo docker compose up -d
-
-# permision
-
-        #   docker system prune -af
+          sudo docker compose up --build -d
