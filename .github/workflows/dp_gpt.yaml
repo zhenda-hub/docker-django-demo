@@ -24,12 +24,13 @@ jobs:
       - name: Build Docker image
         run: |
           cd pj1
-          docker build -t zzdnb/docker_django_demo:${{ github.sha }} .
-          docker tag zzdnb/docker_django_demo:${{ github.sha }} zzdnb/docker_django_demo:latest
+          timestamp=$(date +'%Y%m%d-%H%M%S')
+          docker build -t zzdnb/docker_django_demo:$timestamp .
+          docker tag zzdnb/docker_django_demo:$timestamp zzdnb/docker_django_demo:latest
 
       - name: Push Docker image to registry
         run: |
-          docker push zzdnb/docker_django_demo:${{ github.sha }}
+          docker push zzdnb/docker_django_demo:$timestamp
           docker push zzdnb/docker_django_demo:latest
 
   deploy:
