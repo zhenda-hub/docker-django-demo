@@ -1,0 +1,36 @@
+name: dp gpt
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t zzdnb/docker_django_demo:${{ github.sha }} .
+          docker tag zzdnb/docker_django_demo:${{ github.sha }} zzdnb/docker_django_demo:latest
+
+      - name: Push Docker image to registry
+        run: |
+          docker push zzdnb/docker_django_demo:${{ github.sha }}
+          docker push zzdnb/docker_django_demo:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to production
+        run: |
+          ssh user@your-server "docker pull zzdnb/docker_django_demo:latest && cd /www/wwwroot/docker-django-demo && git pull && sudo docker compose up -d"
