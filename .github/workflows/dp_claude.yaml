@@ -40,8 +40,8 @@ jobs:
         file: ./pj1/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
-        cache-from: type=local,src=/tmp/.buildx-cache
-        cache-to: type=local,dest=/tmp/.buildx-cache-new
+        # cache-from: type=local,src=/tmp/.buildx-cache
+        # cache-to: type=local,dest=/tmp/.buildx-cache-new
 
     # - name: Move cache
     #   run: |
