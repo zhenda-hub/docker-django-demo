@@ -30,15 +30,17 @@ jobs:
           tags: |
             zzdnb/docker_django_demo:latest
             zzdnb/docker_django_demo:${{ github.sha }}
-      # - name: Build Docker image, Push
-      #   run: |
-      #     cd pj1
-      #     timestamp=$(date -u +'%Y%m%d-%H%M%S')
-      #     echo "Using timestamp: $timestamp"
-      #     docker build -t zzdnb/docker_django_demo:$timestamp .
-      #     docker tag zzdnb/docker_django_demo:$timestamp zzdnb/docker_django_demo:latest
-      #     docker push zzdnb/docker_django_demo:$timestamp
-      #     docker push zzdnb/docker_django_demo:latest
+      - name: Build Docker Image
+        # run: docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA -f pj1/Dockerfile .
+        run: |
+          cd pj1
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
+      
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:$GITHUB_SHA
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.IMAGE_NAME }}:latest
 
   deploy:
     needs: build
